@@ -1,234 +1,161 @@
-// move base non js dependent carousel css to main.css to avoid carousel 'FOUT'
+@import 'std'
+
 .carousel-inner
   overflow hidden
   width 100%
   position relative
+  backface-visibility hidden
+  perspective 1000
 
-.carousel .item
-	-webkit-backface-visibility hidden
-	display none
-  position relative
-  -webkit-transform translate3d(0, 0, 0)
-	transform translate3d(0, 0, 0)
-	width 100%
-
-.carousel .item > img
-	display block
-  line-height 1
-
-.carousel .active,
-.carousel .next,
-.carousel .prev
-	display block
-
-.carousel .next,
-.carousel .prev
-	position absolute
-
+.carousel
+	.item
+		backface-visibility hidden
+		display none
+		position relative
+		width 100%
+		transform translate3d(0, 0, 0)
+		& > img
+			display block
+			line-height 1
+	.next,
+	.prev
+		display block
+		position absolute
+	.active
+		display block
 
 // js dependent carousel css
+
 .lt-ie9 .carousel .item
 	zoom 1
 
+/* slide styled */
 
-// slide styled
-.cssanimations .slide .active
-	left 0
+.cssanimations .slide:not(.force-compat)
+	.active
+		left 0
+		&.left
+			left -100%
+		&.right
+			left 100%
+	.next
+		left 100%
+		&.left
+			left 0
+	.prev
+		left -100%
+		&.right
+			left 0
 
-.csstransforms3d .slide .item
-	left 0 !important
-
-.csstransforms3d .slide .active
-	transform translate3d(0, 0, 0)
-
-.cssanimations .slide .next
-	left 100%
-
-.csstransforms3d .slide .next
-	transform translate3d(100%, 0, 0)
-
-.cssanimations .slide .prev
-	left -100%
-
-.csstransforms3d .slide .prev
-	transform translate3d(-100%, 0, 0)
-
-.cssanimations .slide .next.left,
-.cssanimations .slide .prev.right
-	left 0
-
-.csstransforms3d .slide .next.left,
-.csstransforms3d .slide .prev.right
-	transform translate3d(0, 0, 0)
-
-.cssanimations .slide .active.left
-	left -100%
-
-.csstransforms3d .slide .active.left {
-	transform translate3d(-100%, 0, 0)
-
-.cssanimations .slide .active.right
-	left 100%
-
-.csstransforms3d .slide .active.right {
-	transform translate3d(100%, 0, 0)
+.csstransforms3d .slide:not(.force-compat)
+	.item
+		left 0 !important
+	.active
+		transform translate3d(0, 0, 0)
+		&.left
+			transform translate3d(-100%, 0, 0)
+		&.right
+			transform translate3d(100%, 0 ,0)
+	.next
+		transform translate3d(100%, 0, 0)
+		&.left
+			transform translate3d(0, 0, 0)
+	.prev
+		transform translate3d(-100%, 0, 0)
+		&.right
+			transform translate3d(0, 0, 0)
 
 
 // Horizontal Slide
-.slide.horizontal .next,
-.slide.horizontal .prev
-	top 0
+.slide.horizontal
+	.next,
+	.prev
+		top 0
 
-.csstransforms3d .slide.horizontal .item
+.csstransforms3d .slide.horizontal:not(.force-compat) .item
 	top 0 !important
 
-
 // Vertical Slide
-.slide.vertical .carousel-outer
-	overflow hidden
-	position relative
+.slide.vertical
+	.carousel-outer
+		overflow hidden
+		position relative
+	.carousel-inner
+		overflow hidden
+		position static
+		width 100%
+	.active
+		top auto
+	.next,
+	.prev
+		left 0
+		top auto
 
-.slide.vertical .carousel-inner
-	overflow visible
-	position static
 
-.slide.vertical .carousel-inner
-	width 100%
+.no-cssanimations .slide.vertical
+	.item
+		position absolute
+	.next
+		bottom 100%
 
-.no-cssanimations .slide.vertical .item
-	position absolute
+.cssanimations .slide.vertical:not(.force-compat)
+	.active
+		bottom 0
+		&.left
+			bottom -100%
+			left auto
+		&.right
+			bottom 100%
+			left auto
+	.next,
+	.prev
+		left 0
+	.next
+		bottom 100%
+		&.left
+			bottom 0
+	.prev
+		bottom -100%
+		&.right
+			bottom 0
 
-.cssanimations .slide.vertical .active
-	bottom 0
-
-.csstransforms3d .slide.vertical .item
-	bottom 0 !important
-
-.slide.vertical .active
-	top auto
-
-.cssanimations .slide.vertical .next,
-.cssanimations .slide.vertical .prev,
-.slide.vert .next,
-.slide.vert .prev
-	left 0
-
-.csstransforms3d .slide.vertical .next,
-.csstransforms3d .slide.vertical .prev
-	transform translate3d(0, 0, 0)
-
-.cssanimations .slide.vertical .next
-	bottom 100%
-
-.csstransforms3d .slide.vertical .next
-	transform translate3d(0, -100%, 0)
-
-.slide.vertical .next,
-.slide.vertical .prev
-	top auto
-
-.no-csstransitions .slide.vertical .next
-	bottom 100%
-
-.cssanimations .slide.vertical .prev
-	bottom -100%
-
-.csstransforms3d .slide.vertical .prev
-	transform translate3d(0, 100%, 0)
-
-.cssanimations .slide.vertical .next.left,
-.cssanimations .slide.vertical .prev.right
-	bottom 0
-
-.csstransforms3d .slide.vertical .next.left,
-.csstransforms3d .slide.vertical .prev.right
-	transform translate3d(0, 0, 0)
-
-.cssanimations .slide.vertical .active.left
-	left auto
-	bottom -100%
-
-.csstransforms3d .slide.vertical .active.left
-	transform translate3d(0, 100%, 0)
-
-.cssanimations .slide.vertical .active.right
-	left auto
-	bottom 100%
-
-.csstransforms3d .slide.vertical .active.right
-	transform translate3d(0, -100%, 0)
-
+.csstransforms3d .slide.vertical:not(.force-compat)
+	.active
+		bottom 0 !important
+		&.left
+			transform translate3d(0, 100%, 0)
+		&.right
+			transform translate3d(0, -100%, 0)
+	.next,
+	.prev
+		transform translate3d(0, 0, 0)
+	.next
+		transform translate3d(0, -100%, 0)
+		&.left
+			transform translate3d(0, 0, 0)
+	.prev
+		transform translate3d(0, 100%, 0)
+		&.right
+			transform translate3d(0, 0, 0)
 
 // Fade
-.cssanimations .fade .item
-	opacity 0
+.cssanimations .fade:not(.force-compat)
+	.item
+		opacity 0
+	.active
+		opacity 1
+		&.left,
+		&.right
+			left 0
+			opacity 0
+	.next,
+	.prev
+		&.left,
+		&.right
+			opacity 1
 
-.cssanimations .fade .active
-	opacity 1
-
-.fade .next,
-.fade .prev
-	left 0
-	top 0
-
-.cssanimations .fade .active.left,
-.cssanimations .fade .active.right
-	left 0
-	opacity 0
-
-.cssanimations .fade .next.left,
-.cssanimations .fade .next.right,
-.cssanimations .fade .prev.left,
-.cssanimations .fade .prev.right
-	opacity 1
-
-
-
-// controls and captions
-.carousel-control
-	position absolute
-	top 40%
-	left 1em
-	width 2em
-	height 2em
-	margin-top -1em
-	font-size 1em
-	font-weight normal
-	line-height 1.2
-	color #fff
-	text-align center
-	background #222
-	border 0.25em solid #fff
-	border-radius 2em
-	opacity 0.5
-	filter alpha(opacity=50)
-
-.carousel-control.right
-	right 1em
-	left auto
-
-.carousel-control:hover
-	color #fff
-	text-decoration none
-	opacity 0.9
-	filter alpha(opacity=90)
-
-.carousel-caption
-  position absolute
-  left 0
-  right 0
-  bottom 0
-  padding 1em
-  background #333
-  background rgba(0, 0, 0, 0.75)
-
-.carousel-caption h4,
-.carousel-caption p
-  color #fff
-  line-height 1.4
-
-.carousel-caption h4
-  margin 0 0 0.25em
-
-.carousel-caption p
-  margin-bottom 0
+.fade
+	.next,
+	.prev
+		left 0
+		top 0

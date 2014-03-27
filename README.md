@@ -1,44 +1,80 @@
-/* function call for carousel
- *
- * ARGUMENT LIST
- *
- * pause: /* what effect to pause carousel on */ ['hover', false] - default: 'hover'
- * effect: /* the slide effect */ ['fade', 'slide'] - default: 'fade'
- * orientation /* the slide orientation if the effect is 'slide' */ ['vertical', 'orientation'] - default: orientation
- * animate_timer /* animation duration in milliseconds */ - default: 2000
- * animate_timing_function /* standard css3 timing functions to use for the animation if the browser supports it */ ['ease', 'linear', 'ease-in', 'ease-in-out'] - default: 'ease'
- * slide_view_time /* time that slide stays after the animation is completed (effective viewing time) */ - default: 2000
- * reverse /* direction of slide, if fade just reverse the order if true, if slide[vertical] slides go from down to up if true, if slide[horizontal] slides go from right to left if true */ - default: false
- * ratio /* the aspect ratio of the images - needed for slide[vertical] to keep the carousel the correct dimensions */ - default: 56.25 (16:9)
- */
+Javascript class to handle carousel functionality.
 
-new nxnw.carousel($('selector'), {
-	arguments
-});
+HTML skeleton is available via this [Gist](https://gist.github.com/aberan/9818717).
+
+### Initialization
+```javascript
+new nxnw.Carousel( args, options );
+```
+
+**args** and **options** are expected to be objects
+
+### Arguments
+Argument | Explanation
+----------- | -----------
+el          | jquery DOM object i.e. $('.foo')
+selector    | string used for el i.e. '.foo'
+callback    | callback function that gets called when a fold's animation completes
+post        | callback function that gets called when the accordian initialization finishes
 
 
+### Options
+Option | Default | Explanation
+--------------------- | ------------ | ------------------------------------------------------------------------------- |
+auto                  | true         | whether carousel starts automatically or not                                    |
+$anchors              | false        | anchors used to toggle slides. jQuery object                                    |
+$controls             | false        | prev/next controls. jQuery object                                               |
+pause                 | 'hover'      | event to pause carousel. False if not pausable                                  |
+effect                | 'fade'       | slide transition. 'fade' or 'slide'                                             |
+orientation           | 'horizontal' | slide direction. Only applicable for 'slide' effect. 'horizontal' or 'vertical' |
+animateTimer          | 2000         | animation duration in ms                                                        |
+animateTimingFunction | 'ease'       | CSS3 timing function 'ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out'     |
+slideViewTime         | 2000         | duration slide remains in place in ms                                           |
+reverse               | false        | flag to reverse slide direction                                                 |
+ratio                 | 56.25        | if necessary set for IE < 10 that need flexible box that maintains aspect ratio |
 
-/*
- * CAROUSEL HTML SKELETON
- */
+### Usage
+```javascript
+//additional variable you want to keep track of
+var foo = {
+	a: 1,
+	b: 2
+};
 
-<div class="carousel" id="carousel_selector">
-	<div class="carousel-outer">
-		<div class="carousel-inner">
-			<div class="item active">
-				<!-- slide content here -->
-			</div>
-			<div class="item">
-				<!-- slide content here -->
-			</div>
-		</div> <!-- \.carousel-inner -->
-	</div> <!-- \.carousel-outer -->
-	<!-- optional prev/next controls, simply remove them if not needed -->
-	<a class="left carousel-control" href="#test" data-slide="_prev">‹</a>
-	<a class="right carousel-control" href="#test" data-slide="_next">›</a>
-	<!-- slide anchors, simply remove them if not needed -->
-	<!-- if using anchors need 1 for each item with the corresponding index as its data-pos -->
-	<div class="anchors">
-		<a href="#" data-pos="0"></a><a href="#" data-pos="1">1</a>
-	</div> <!-- \.anchors -->
-</div> <!-- \.carousel -->
+//object containing various callback functions to pass to the accordian
+var functions = ( function( foo ) {
+	return {
+		callback: function() {
+			//do stuff here after accordian fold finishes animating
+		},
+
+		post: function() {
+			//do stuff here after accordian initializes
+		}
+	};
+})( foo ); //functions
+
+//object containing the arguments for the accordian
+var args = {
+	el: $('#carousel'),
+	selector: '.carousel',
+	callback: functions.callback,
+	post: functions.post
+};
+
+//object containing any options that should be set
+var options = {
+	effect: 'slide',
+	orientation: 'vertical',
+	animate_timer: 500,
+	slide_view_time: 5000,
+	animate_timing_function: 'ease-in',
+	reverse: false,
+	$anchors: $('.anchors button'),
+	$controls: $('.carousel-control')
+};
+
+new nxnw.Carousel( args, options );
+```
+
+
