@@ -207,6 +207,10 @@ define(function(require){
       return this;
     }, // pause
 
+    unpause: function() {
+      this.paused = false;
+    },
+
     stop : function( $active, $next, type, direction ) {
       this.paused = true;
       this.sliding = false;
