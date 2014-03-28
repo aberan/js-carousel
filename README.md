@@ -15,7 +15,7 @@ Argument | Explanation
 el          | jquery DOM object i.e. $('.foo')
 selector    | string used for el i.e. '.foo'
 callback    | callback function that gets called when a fold's animation completes
-post        | callback function that gets called when the accordian initialization finishes
+post        | callback function that gets called when the carousel initialization finishes
 
 
 ### Options
@@ -41,20 +41,20 @@ var foo = {
 	b: 2
 };
 
-//object containing various callback functions to pass to the accordian
+//object containing various callback functions to pass to the carousel
 var functions = ( function( foo ) {
 	return {
 		callback: function() {
-			//do stuff here after accordian fold finishes animating
+			//do stuff here after carousel fold finishes animating
 		},
 
 		post: function() {
-			//do stuff here after accordian initializes
+			//do stuff here after carousel initializes
 		}
 	};
 })( foo ); //functions
 
-//object containing the arguments for the accordian
+//object containing the arguments for the carousel
 var args = {
 	el: $('#carousel'),
 	selector: '.carousel',
