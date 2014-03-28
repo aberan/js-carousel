@@ -66,9 +66,9 @@ var args = {
 var options = {
 	effect: 'slide',
 	orientation: 'vertical',
-	animate_timer: 500,
-	slide_view_time: 5000,
-	animate_timing_function: 'ease-in',
+	animateTimer: 500,
+	slideViewTime: 5000,
+	animateTimingFunction: 'ease-in',
 	reverse: false,
 	$anchors: $('.anchors button'),
 	$controls: $('.carousel-control')
