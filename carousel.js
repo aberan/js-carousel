@@ -89,7 +89,7 @@ define(function(require){
       this.slide( this.options.slide );
     }
 
-    if( this.options.pause === 'hover' ) {
+    if( this.options.pause === 'hover' && !this.options.manual ) {
       this.$el.on( 'mouseenter',
         $.proxy( function() {
           this.pause();
@@ -128,7 +128,7 @@ define(function(require){
     }
 
     //fire init function if carousel set to auto slide
-    if ( this.options.auto ) {
+    if ( this.options.autoStart ) {
       this.init();
     }
   } /* \constructor */
@@ -137,7 +137,8 @@ define(function(require){
 
     // now we define the prototype for slideShow
     defaults: {
-      auto: true,
+      autoStart: true,
+      manual: false,
       $anchors: false,
       $controls: false,
       pause: 'hover',
@@ -355,7 +356,7 @@ define(function(require){
       }
 
       //testing cycle here
-      if ( this.options.auto ) {
+      if ( !this.options.manual ) {
         this.cycle();
       }
     }, // updateSlides

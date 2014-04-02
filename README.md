@@ -22,6 +22,7 @@ post        | callback function that gets called when the carousel initializatio
 Option | Default | Explanation
 --------------------- | ------------ | ------------------------------------------------------------------------------- |
 auto                  | true         | whether carousel starts automatically or not                                    |
+manual                | false        | whether carousel slides automatically or only on user interaction
 $anchors              | false        | anchors used to toggle slides. jQuery object                                    |
 $controls             | false        | prev/next controls. jQuery object                                               |
 pause                 | 'hover'      | event to pause carousel. False if not pausable                                  |
